@@ -3,7 +3,6 @@ import 'package:harold_to_do_app/utility/exports.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set the custom delegate
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
 
@@ -13,16 +12,33 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.appRouter});
   final AppRouter appRouter;
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  MyApp({Key? key, required this.appRouter})
+      : navigatorKey = GlobalKey<NavigatorState>(),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TasksBloc(),
-      child: MaterialApp(
-        home: const Home(),
-        onGenerateRoute: appRouter.onGenerateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TasksBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SwitchBloc(),
+        )
+      ],
+      child: BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state) {
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            theme: state.switchValue ? AppTheme.darkTheme : AppTheme.lightTheme,
+            home: const TabsScreen(),
+            onGenerateRoute: appRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }

@@ -17,6 +17,8 @@ class _RecycleBinState extends State<RecycleBin> {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).primaryColorLight;
+    final secondaryHeaderColor = Theme.of(context).secondaryHeaderColor;
+
     final canvasColor = AppTheme.lightTheme.canvasColor;
     final bodyTextStyleMeduim = AppTheme.lightTheme.textTheme.bodyMedium;
     final bodyTextStylebodyLarge = AppTheme.lightTheme.textTheme.bodyLarge;
@@ -29,23 +31,39 @@ class _RecycleBinState extends State<RecycleBin> {
           backgroundColor: backgroundColor,
           appBar: AppBar(
             backgroundColor: canvasColor,
-            title: Text(
+            title: const Text(
               'Recycled tasks',
-              style: bodyTextStyleMeduim,
+             
             ),
+            actions: [
+              PopupMenuButton(
+                  itemBuilder: ((context) => [
+                        PopupMenuItem(
+                            child: TextButton.icon(
+                                onPressed: () {
+                                  context
+                                      .read<TasksBloc>()
+                                      .add(DeleteAllTasks());
+                                },
+                                icon: const Icon(Icons.delete_forever),
+                                label: const Text('Delet all'))),
+                      ]))
+            ],
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  recycledTask.length.toString(),
-                  style: bodyTextStyleMeduim,
+                  "${recycledTask.length.toString()} Recycled tasks",
+                  style: TextStyle(color: secondaryHeaderColor),
                 ),
               ),
               TasksList(
                 taskList: recycledTask,
                 canvasColor: canvasColor,
-                backgroundColor: backgroundColor,
                 bodyTextStyleMeduim: bodyTextStyleMeduim,
                 bodyTextStyleLarge: bodyTextStylebodyLarge,
               ),

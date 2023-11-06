@@ -1,12 +1,14 @@
 import 'package:harold_to_do_app/utility/exports.dart';
 
+enum AppThemes { lightTheme, darkTheme }
+
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
     brightness: Brightness.light,
     primaryColorLight: Colors.white,
     canvasColor: Colors.green,
-    secondaryHeaderColor: Colors.white,
+    secondaryHeaderColor: Colors.black,
     textTheme: TextTheme(
       displayLarge: _AppTextTheme.light.displayLarge,
       displayMedium: _AppTextTheme.light.displayMedium,
@@ -19,7 +21,7 @@ class AppTheme {
     brightness: Brightness.dark,
     canvasColor: Colors.green,
     primaryColorLight: Colors.black,
-    secondaryHeaderColor: Colors.black,
+    secondaryHeaderColor: Colors.white,
     textTheme: TextTheme(
       displayLarge: _AppTextTheme.dark.displayLarge,
       displayMedium: _AppTextTheme.dark.displayMedium,

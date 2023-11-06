@@ -12,7 +12,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with WidgetsBindingObserver {
   ThemeData _currentTheme = ThemeData();
 
-  // Update the current theme based on the platform brightness
   @override
   void didChangePlatformBrightness() {
     setState(() {
@@ -23,7 +22,6 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     });
   }
 
-// Set the initial theme based on the platform brightness
   @override
   void initState() {
     super.initState();

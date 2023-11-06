@@ -12,22 +12,22 @@ class NavigateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bodyTextStyleMeduim = AppTheme.lightTheme.textTheme.bodyMedium;
-    final canvasColor = AppTheme.lightTheme.canvasColor;
+    final backgroundColor = Theme.of(context).primaryColorLight;
+    final secondaryHeaderColor = Theme.of(context).secondaryHeaderColor;
 
     return Card(
-      color: canvasColor.withOpacity(.5),
+      color: backgroundColor,
       elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
           onTap: onPressed,
           title: Text(
             buttonText,
-            style: bodyTextStyleMeduim,
+            style: TextStyle(color: secondaryHeaderColor),
           ),
-          trailing: const Icon(
+          trailing: Icon(
             Icons.navigate_next_rounded,
-            color: Colors.grey,
+            color: secondaryHeaderColor,
           )),
     );
   }

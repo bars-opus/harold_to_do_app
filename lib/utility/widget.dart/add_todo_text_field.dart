@@ -13,15 +13,25 @@ class AddTodoTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canvasColor = AppTheme.lightTheme.canvasColor;
+    final backgroundColor = AppTheme.lightTheme.primaryColorLight;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextField(
         autofocus: autofocus,
         maxLines: null,
         controller: controller,
+        style: TextStyle(color: backgroundColor),
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: const TextStyle(color: Colors.grey),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: canvasColor),
+          ),
         ),
       ),
     );

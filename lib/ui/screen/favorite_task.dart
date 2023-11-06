@@ -1,30 +1,30 @@
 import 'package:harold_to_do_app/utility/exports.dart';
 
-class TaskCompletedScreen extends StatefulWidget {
-  static const id = 'task_completed_screen';
+class FavoriteTaskScreen extends StatefulWidget {
+  static const id = 'favorite_screen';
 
-  const TaskCompletedScreen({
+  const FavoriteTaskScreen({
     super.key,
   });
 
   @override
-  State<TaskCompletedScreen> createState() => _TaskCompletedScreenState();
+  State<FavoriteTaskScreen> createState() => _FavoriteTaskScreenState();
 }
 
 var uuid = const Uuid();
 
-class _TaskCompletedScreenState extends State<TaskCompletedScreen> {
+class _FavoriteTaskScreenState extends State<FavoriteTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).primaryColorLight;
-    final secondaryHeaderColor = Theme.of(context).secondaryHeaderColor;
     final canvasColor = AppTheme.lightTheme.canvasColor;
+    final secondaryHeaderColor = Theme.of(context).secondaryHeaderColor;
     final bodyTextStyleMeduim = AppTheme.lightTheme.textTheme.bodyMedium;
     final bodyTextStyleLarge = AppTheme.lightTheme.textTheme.bodyLarge;
 
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        List<Task> completeList = state.completedTasks;
+        List<Task> favoriteTaskList = state.favoriteTasks;
 
         return Scaffold(
           backgroundColor: backgroundColor,
@@ -35,12 +35,12 @@ class _TaskCompletedScreenState extends State<TaskCompletedScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "${completeList.length.toString()} Completed tasks",
+                  "${favoriteTaskList.length.toString()} Favorite tasks",
                   style: TextStyle(color: secondaryHeaderColor),
                 ),
               ),
               TasksList(
-                taskList: completeList,
+                taskList: favoriteTaskList,
                 canvasColor: canvasColor,
                 bodyTextStyleMeduim: bodyTextStyleMeduim,
                 bodyTextStyleLarge: bodyTextStyleLarge,
@@ -52,6 +52,3 @@ class _TaskCompletedScreenState extends State<TaskCompletedScreen> {
     );
   }
 }
-
-
-
